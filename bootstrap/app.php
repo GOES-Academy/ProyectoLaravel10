@@ -41,6 +41,10 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+// Obtener el tiempo de ejecución de la aplicación en milisegundos
+define('APP_START_TIME', microtime(true));
+
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application
