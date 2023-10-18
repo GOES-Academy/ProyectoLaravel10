@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class UsuarioController extends Controller
 {
-    //listado completo de usuarios
+    //Listado completo de usuarios
     public function listaUsuarios()
     {
         $usuarios = User::all();
@@ -21,7 +21,7 @@ class UsuarioController extends Controller
         return Http::respuesta(Http::OK, $usuarios);
     }
 
-    //obtener un usuario segun nombre por un get
+    //Obtener un usuario segun nombre por un get
     public function obtenerUsuarioGet($nombre)
     {
         $usuario = User::where('nombre', $nombre)->first();
@@ -33,7 +33,7 @@ class UsuarioController extends Controller
         return Http::respuesta(Http::OK, $usuario);
     }
 
-    //obtener un usuario segun nombre por un post
+    //Mensaje de saludo seguido de la concatenacion del nombre que recibo de un post
     public function obtenerUsuarioPost(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -44,12 +44,6 @@ class UsuarioController extends Controller
             return Http::respuesta(Http::UNPROCESSABLE_CONTENT, ['error' => $validator->errors()]);
         }
 
-        $usuario = User::where('nombre', $request->nombre)->first();
-
-        if (!$usuario) {
-            return Http::respuesta(Http::NOT_FOUND, ['error' => 'No se encontro el usuario']);
-        }
-
-        return Http::respuesta(Http::OK, 'Hola ' . $usuario->nombre);
+        return Http::respuesta(Http::OK, 'Hola ' . $request->nombre);
     }
 }
